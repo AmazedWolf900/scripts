@@ -2,17 +2,17 @@
 
 echo "Service started"
 
-BROKER="10.8.0.3"
-USER="hassio"
-PASSWD="eH7h3y3hyWD4QUNP"
-TOPIC="vps/stats"
+BROKER="XX.XX.XX.XX"
+USER="user_name"
+PASSWD="password"
+TOPIC="topic"
 
 SLEEP_SEC=30
 
 while :
 do
 
-echo "Gathering system informations"
+echo "Gathering system information"
 
 #Get upgradable packages
 upg_pac=`apt list --upgradable 2>/dev/null | wc -l`
