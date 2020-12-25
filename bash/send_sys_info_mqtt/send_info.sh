@@ -1,4 +1,5 @@
 #!/bin/bash
+# location: /usr/bin
 
 echo "Service started"
 
