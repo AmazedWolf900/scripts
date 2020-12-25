@@ -1,0 +1,120 @@
+version: '3.8' 
+
+services:
+  db:
+    image: mariadb
+    container_name: nextcloud-db
+    networks:
+      - nextcloud_network
+    volumes:
+      - db:/var/lib/mysql
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWD}
+      - MYSQL_PASSWORD=${DB_PASSWD}
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+    restart: unless-stopped
+
+  redis:
+    image: redis:latest
+    container_name: nextcloud-redis
+    restart: unless-stopped
+    networks:
+      - nextcloud_network
+    volumes:
+      - redis:/var/lib/redis
+
+  app:
+    image: nextcloud
+    container_name: nextcloud-app
+    networks:
+      - nextcloud_network
+    ports:
+      - "127.0.0.1:7010:80"
+#      - 7011:443
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - nextcloud:/var/www/html
+      - ./app/config:/var/www/html/config
+      - ./app/custom_apps:/var/www/html/custom_apps
+      - ./app/data:/var/www/html/data
+      - ./app/themes:/var/www/html/themes
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - MYSQL_PASSWORD=${DB_PASSWD}
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_HOST=${DB_HOST}
+      - REDIS_HOST=redis
+    restart: unless-stopped
+
+volumes:
+  nextcloud:
+  db:
+  redis:
+
+networks:
+  nextcloud_network:
+version: '3.8' 
+
+services:
+  db:
+    image: mariadb
+    container_name: nextcloud-db
+    networks:
+      - nextcloud_network
+    volumes:
+      - db:/var/lib/mysql
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWD}
+      - MYSQL_PASSWORD=${DB_PASSWD}
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+    restart: unless-stopped
+
+  redis:
+    image: redis:latest
+    container_name: nextcloud-redis
+    restart: unless-stopped
+    networks:
+      - nextcloud_network
+    volumes:
+      - redis:/var/lib/redis
+
+  app:
+    image: nextcloud
+    container_name: nextcloud-app
+    networks:
+      - nextcloud_network
+    ports:
+      - "127.0.0.1:7010:80"
+#      - 7011:443
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - nextcloud:/var/www/html
+      - ./app/config:/var/www/html/config
+      - ./app/custom_apps:/var/www/html/custom_apps
+      - ./app/data:/var/www/html/data
+      - ./app/themes:/var/www/html/themes
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - MYSQL_PASSWORD=${DB_PASSWD}
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_HOST=${DB_HOST}
+      - REDIS_HOST=redis
+    restart: unless-stopped
+
+volumes:
+  nextcloud:
+  db:
+  redis:
+
+networks:
+  nextcloud_network:
