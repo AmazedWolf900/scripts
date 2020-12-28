@@ -1,22 +1,12 @@
 version: '3.8'
 
 services:
-  sftp:
-    image: atmoz/sftp
-    container_name: cctv-sftp
-    volumes:
-        - ./data:/home/cctv/cctv
-    ports:
-        - "7061:22"
-    command: ${USER}:${PASSWORD}:1001
-    restart: unless-stopped
-
   filebrowser:
     image: hurlenko/filebrowser
     container_name: cctv-fb
     ports:
-      - 7060:8080
+      - "127.0.0.1:7060:8080"
     volumes:
-      - ./data:/data
+      - /home/cctv/data:/data:ro
       - ./filebrowser/config:/config
-    restart: unless-stopped
+    restart: always
