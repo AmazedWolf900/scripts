@@ -1,0 +1,9 @@
+include /usr/share/nano/sh.nanorc
+include /usr/share/nano/asm.nanorc
+include /usr/share/nano/autoconf.nanorc
+include /usr/share/nano/awk.nanorc
+include /usr/share/nano/cmake.nanorc
+include /usr/share/nano/c.nanorc
+include /usr/share/nano/css.nanorc
+include /usr/share/nano/json.nanorc
+include /usr/share/nano/markdown.nanorc
