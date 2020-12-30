@@ -2,6 +2,7 @@
 # File:     .zshrc   ZSH resource file                             #
 # Version:  0.1.16                                                 #
 # Author:   Øyvind "Mr.Elendig" Heggstad <mrelendig@har-ikkje.net> #
+# Modified: Tomas "Wilde" Weber <webertomas01@gmail.com>
 #------------------------------------------------------------------#
 
 #-----------------------------
