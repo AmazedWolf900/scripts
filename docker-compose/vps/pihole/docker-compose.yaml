@@ -1,0 +1,20 @@
+services:
+  app:
+    image: pihole/pihole:latest
+    container_name: pihole-app
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 127.0.0.1:7070:80
+    environment:
+      TZ: 'Europe/Prague'
+      VIRTUAL_HOST: pihole.mysit.eu
+      DNS1: 1.1.1.1
+      DNS2: 8.8.8.8
+      WEBPASSWORD: ${WEB_PASSWD}
+    volumes:
+      - './etc-pihole/:/etc/pihole/'
+      - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
+#    cap_add:
+#      - NET_ADMIN
+    restart: always
