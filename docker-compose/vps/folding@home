@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  app:
+    image: ghcr.io/linuxserver/foldingathome
+    container_name: folding-app
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Prague
+    volumes:
+      - ./config:/config
+    ports:
+      - 127.0.0.1:7080:7396
+    restart: always
