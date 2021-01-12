@@ -29,6 +29,8 @@ alias update="sudo apt update"
 alias upgrade="sudo apt upgrade"
 alias upgradey="sudo apt upgrade -y"
 alias upgradel="sudo apt list --upgradable"
+alias remove="sudo apt remove"
+alias autoremove="sudo apt autoremove"
 
 # Some more aliases
 alias grep="grep --color=auto"
