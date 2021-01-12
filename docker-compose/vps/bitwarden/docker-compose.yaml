@@ -8,7 +8,9 @@ services:
 #      - "80"
     volumes:
       - bitwarden:/data
-    restart: unless-stopped
+    environment:
+      - SIGNUPS_ALLOWED=false
+    restart: always 
     networks:
       - bitwarden-network
 
@@ -23,6 +25,7 @@ services:
       - ./data/ssl:/etc/ssl
     networks:
       - bitwarden-network
+    restart: always
 
 volumes:
   bitwarden:
