@@ -17,6 +17,9 @@ export EDITOR
 # Get the public IP address
 alias ipp="curl ifconfig.co"
 
+# Save iptables rules
+alias iptablepersist="sudo iptables-save > /etc/iptables/rules.v4 && sudo ip6tables-save > /etc/iptables/rules.v6"
+
 # Nginx server control
 alias nginxtest="sudo service nginx testconfig"
 alias nginxstop="sudo service nginx stop"
