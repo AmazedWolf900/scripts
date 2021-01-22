@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  app:
+    image: collabora/code
+    container_name: collabora-app
+    ports:
+      - 127.0.0.1:7100:9980
+#    environment:
+#      - extra_params="--o:ssl.enable=false"
+    volumes:
+      - /etc/timezone:/etc/timezone
+      - /etc/localtime:/etc/localtime
+    extra_hosts:
+      - "${NEXTCLOUD_FQDN}:${NEXTCLOUD_IPADDRESS}"
+      - "${COLLABORA_FQDN}:${NEXTCLOUD_IPADDRESS}"
+    environment:
+      - 'domain=${NEXTCLOUD_FQDN}'
+      - 'dictionaries=en'
+    restart: always
