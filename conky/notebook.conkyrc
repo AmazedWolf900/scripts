@@ -1,0 +1,100 @@
+conky.config = {
+    alignment = 'top_right',
+    background = false,
+    border_width = 1,
+    cpu_avg_samples = 2,
+        default_color = 'white',
+    default_outline_color = 'white',
+    default_shade_color = 'white',
+    draw_borders = false,
+    draw_graph_borders = false,
+    draw_outline = false,
+    draw_shades = false,
+    use_xft = true,
+    font = 'DejaVu Sans Mono:size=12',
+    gap_x = 10,
+    gap_y = 10,
+    minimum_height = 5,
+        minimum_width = 5,
+    maximum_width = 300,
+    net_avg_samples = 2,
+    no_buffers = true,
+    out_to_console = false,
+    out_to_stderr = false,
+    extra_newline = false,
+    own_window = true,
+    own_window_type = 'normal',
+    own_window_transparent = true,
+    own_window_hints = 'undecorated,sticky,below,skip_taskbar,skip_pager',
+    own_window_class = conky,
+    own_window_argb_value = 0,
+    own_window_colour = 000000,
+    own_window_argb_visual = true,
+    stippled_borders = 0,
+    update_interval = 1,
+    uppercase = false,
+    use_spacer = 'none',
+    show_graph_scale = false,
+    show_graph_range = false,
+    double_buffer = true,
+
+    int1 = 'eth0',
+    int2 = 'wlan0'
+}
+
+conky.text = [[
+#
+# Úvod
+${font Dejavu Sans Mono:size=20}$alignc${time %H:%M:%S}
+$font$alignc$sysname $kernel
+#
+# Systém
+${font Dejavu Sans Mono:size=14}${color orange}System $hr$font
+# ${color #2ea7e8}Updates  :  $color${execi 30 pacman -Qu | wc -l}
+ ${color #2ea7e8}Uptime   :  $color$uptime
+ ${color #2ea7e8}CPU Freq :  $color$freq MHz
+ ${color #2ea7e8}CPU      :  $color$cpu%$alignr${color #68e63e}${cpubar 4,100}
+ ${color #2ea7e8}RAM      :  $color$memperc%$alignr${color #68e63e}${membar 4,100}
+ ${color #2ea7e8}Swap     :  $color$swapperc%$alignr${color #68e63e}${swapbar 4,100}
+# ${color #2ea7e8}Battery  :  $color${battery_percent BAT0}%$alignr${color #68e63e}${battery_bar 4,100}
+#
+# Teploty
+${font Dejavu Sans Mono:size=14}${color orange}Temperatures $hr$font
+ ${color #2ea7e8}CPU      :  $color${exec sensors | grep 'CPU:' | cut -c18-24}
+ ${color #2ea7e8}GPU      :  $color${exec sensors | grep 'Ambient:' | cut -c18-24}
+#
+# Disky
+${font Dejavu Sans Mono:size=14}${color orange}Disk $hr$font
+ ${color #2ea7e8}Root     :  $color${fs_used /} / ${fs_size /}
+# ${color #2ea7e8}Disk     :  $color${fs_used /mnt/Disk} / ${fs_size /mnt/Disk}
+# ${color #2ea7e8}DiskW    :  $color${fs_used /mnt/DiskW} / ${fs_size /mnt/DiskW}
+# ${color #2ea7e8}DiskC    :  $color${fs_used /mnt/DiskC} / ${fs_size /mnt/DiskC}
+# Síť
+${font Dejavu Sans Mono:size=14}${color orange}Network $hr$font
+$color${if_existing /sys/class/net/eth0/operstate up}${color red}${alignc}Ethernet
+ ${color #2ea7e8}Local IP $alignr Public IP
+ $color${addr eth0} $alignr ${execi 10  wget -q -O- http://ifconfig.co; echo}
+ ${color #2ea7e8}▲ Up   : $color${upspeed eth0}/s $alignr${totalup eth0}
+ ${color #68e63e}${upspeedgraph eth0 30}
+ ${color #2ea7e8}▼ Down : $color${downspeed eth0}/s $alignr${totaldown eth0}
+ ${color #68e63e}${downspeedgraph eth0 30}${endif}
+$color${if_existing /sys/class/net/wlan0/operstate up}${color red}${alignc}WiFi
+ ${color #2ea7e8}Local IP $alignr Public IP
+ $color${addr wlan0} $alignr ${execi 10  wget -q -O- http://ifconfig.co; echo}
+ ${color #2ea7e8}▲ Up   : $color${upspeed wlan0}/s $alignr${totalup wlan0}
+ ${color #68e63e}${upspeedgraph wlan0 30}
+ ${color #2ea7e8}▼ Down : $color${downspeed wlan0}/s $alignr${totaldown wlan0}
+ ${color #68e63e}${downspeedgraph wlan0 30}${endif}
+#
+# Procesy
+${font Dejavu Sans Mono:size=14}${color orange}Processes $hr$font
+ ${color #2ea7e8}Name $alignr            PID CPU% MEM%${font sans-serif:normal:size=10}$color
+   ${top name 1} $alignr ${top pid 1} ${top cpu 1}% ${top mem 1}%
+   ${top name 2} $alignr ${top pid 2} ${top cpu 2}% ${top mem 2}%
+   ${top name 3} $alignr ${top pid 3} ${top cpu 3}% ${top mem 3}%
+   ${top name 4} $alignr ${top pid 4} ${top cpu 4}% ${top mem 4}%
+   ${top name 5} $alignr ${top pid 5} ${top cpu 5}% ${top mem 5}%
+   ${top name 6} $alignr ${top pid 6} ${top cpu 6}% ${top mem 6}%
+   ${top name 7} $alignr ${top pid 7} ${top cpu 7}% ${top mem 7}%
+   ${top name 8} $alignr ${top pid 8} ${top cpu 8}% ${top mem 8}%
+]]
